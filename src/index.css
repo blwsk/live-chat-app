@@ -5,6 +5,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#hs-eu-cookie-confirmation {
+  display: none;
+}
+
 .really-big {
   font-size: 1000%;
   font-weight: 900;
