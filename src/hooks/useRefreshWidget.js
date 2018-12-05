@@ -6,7 +6,8 @@ export const useRefreshWidget = (...args) => {
       window &&
       window.hubspot &&
       window.hubspot.messages &&
-      window.hubspot.messages.EXPERIMENTAL_API
+      window.hubspot.messages.EXPERIMENTAL_API &&
+      window.hubspot.messages.EXPERIMENTAL_API.requestWidgetRefresh
     ) {
       console.log('request widget open');
       window.hubspot.messages.EXPERIMENTAL_API.requestWidgetRefresh(...args);
