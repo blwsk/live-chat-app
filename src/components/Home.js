@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRefreshWidget } from './hooks/useRefreshWidget';
+import { useRefreshWidget } from '../hooks/useRefreshWidget';
 
 function Home(props) {
   useRefreshWidget();
