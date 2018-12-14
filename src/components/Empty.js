@@ -1,6 +1,9 @@
 import React from 'react';
+import { useRefreshWidget } from '../hooks/useRefreshWidget';
 
-function Home() {
+function Empty() {
+  useRefreshWidget();
+
   return (
     <React.Fragment>
       <div className="really-big">Empty</div>
@@ -9,6 +12,6 @@ function Home() {
   );
 }
 
-Home.propTypes = {};
+Empty.propTypes = {};
 
-export default Home;
+export default Empty;
