@@ -1,8 +1,8 @@
 import React from 'react';
-import { useRefreshWidget } from '../hooks/useRefreshWidget';
+import { useLiveChatExternalApi } from '../hooks/useLiveChatExternalApi';
 
 function Info(props) {
-  useRefreshWidget();
+  useLiveChatExternalApi();
 
   return <div className="really-big">Info</div>;
 }

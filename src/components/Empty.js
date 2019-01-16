@@ -1,8 +1,8 @@
 import React from 'react';
-import { useRefreshWidget } from '../hooks/useRefreshWidget';
+import { useLiveChatExternalApi } from '../hooks/useLiveChatExternalApi';
 
-function Empty() {
-  useRefreshWidget();
+function Empty(props) {
+  useLiveChatExternalApi();
 
   return (
     <React.Fragment>
