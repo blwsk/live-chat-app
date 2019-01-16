@@ -2,18 +2,20 @@ import { useEffect } from 'react';
 
 export const useLiveChatExternalApi = () => {
   useEffect(() => {
-    const hsc = window.HubSpotConversations;
-
-    if (hsc && hsc.debug && hsc.refresh) {
+    const isApiPresent = window.HubSpotConversations
+      && window.HubSpotConversations.debug
+      && window.HubSpotConversations.refresh;
+    
+    if (isApiPresent) {
       console.log('>>> calling HubSpotConversations directly <<<');
-      hsc.debug(true);
-      hsc.refresh();
+      window.HubSpotConversations.debug(true);
+      window.HubSpotConversations.refresh();
     } else {
       window.hsConversationsOnReady = [
         () => {
           console.log('>>> using hsConversationsOnReady callback array <<<');
-          hsc.debug(true);
-          hsc.refresh();
+          window.HubSpotConversations.debug(true);
+          window.HubSpotConversations.refresh();
         }
       ];
     }
