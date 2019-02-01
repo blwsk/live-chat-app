@@ -16,7 +16,6 @@ export const useLiveChatExternalApi = () => {
         () => {
           console.log('>>> using hsConversationsOnReady callback array <<<');
           window.HubSpotConversations.debug(true);
-          window.HubSpotConversations.widget.refresh();
         }
       ];
     }
