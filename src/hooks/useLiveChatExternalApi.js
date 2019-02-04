@@ -1,5 +1,13 @@
 import { useEffect } from 'react';
 
+function loadOrRefresh() {
+  if (window.HubSpotConversations.widget.status().loaded === true) {
+    window.HubSpotConversations.widget.refresh();
+  } else {
+    window.HubSpotConversations.widget.load();
+  }
+}
+
 export const useLiveChatExternalApi = () => {
   useEffect(() => {
     const isApiPresent =
@@ -10,7 +18,7 @@ export const useLiveChatExternalApi = () => {
     if (isApiPresent) {
       console.log('>>> calling HubSpotConversations directly <<<');
       window.HubSpotConversations.debug(true);
-      window.HubSpotConversations.widget.refresh();
+      loadOrRefresh();
     } else {
       window.hsConversationsOnReady = [
         () => {
