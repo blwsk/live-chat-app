@@ -11,7 +11,7 @@ function Login(props) {
 
     window.firebase
       .auth()
-      .setPersistence(window.firebase.auth.Auth.Persistence.SESSION)
+      .setPersistence(window.firebase.auth.Auth.Persistence.LOCAL)
       .then(() =>
         window.firebase.auth().sendSignInLinkToEmail(email, {
           url: `${window.location.origin}/auth`,
