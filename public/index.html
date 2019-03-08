@@ -38,8 +38,23 @@
     -->
 
     <script type="text/javascript">
-      window.__DO_NOT_LOAD_THE_WIDGET_IMMEDIATELY__ = true;
+      window.hsConversationsSettings = {
+        loadImmediately: false
+      };
     </script> 
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+    <script>
+      var config = {
+        apiKey: "%REACT_APP_FIREBASE_API_KEY%",
+        authDomain: "%REACT_APP_FIREBASE_AUTH_DOMAIN%",
+        databaseURL: "%REACT_APP_FIREBASE_DATABASE_URL%",
+        projectId: "%REACT_APP_FIREBASE_PROJECT_ID%",
+        storageBucket: "%REACT_APP_FIREBASE_STORAGE_BUCKET%",
+        messagingSenderId: "%REACT_APP_FIREBASE_MESSAGING_SENDER_ID%"
+      };
+      firebase.initializeApp(config);
+    </script>
 
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scriptsqa.com/99209436.js"></script>
