@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function Auth({ history: { push }, updateAuthenticated }) {
+function Auth({ history: { push } }) {
   useEffect(() => {
     if (
       window.firebase.auth().isSignInWithEmailLink(window.location.href) &&
@@ -12,12 +12,9 @@ function Auth({ history: { push }, updateAuthenticated }) {
         .then(() => {
           window.localStorage.removeItem('liveChatKrbEmail');
 
-          updateAuthenticated(true);
           push('/');
         })
         .catch(err => {
-          updateAuthenticated(false);
-
           throw Object.assign(new Error(), err);
         });
     }

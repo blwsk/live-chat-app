@@ -1,10 +1,8 @@
 import React from 'react';
 
-function Logout({ history: { push }, updateAuthenticated }) {
+function Logout({ history: { push } }) {
   const onClick = () => {
     window.firebase.auth().signOut();
-    updateAuthenticated(false);
-
     push('/');
   };
 
