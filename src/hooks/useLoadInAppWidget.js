@@ -28,11 +28,14 @@ export const useLoadInAppWidget = () => {
       method: 'GET',
       withCredentials: true,
       credentials: 'include',
-      headers: {
+
+      headers: new Headers({
         accept: 'application/json',
-        authorization: `Bearer ${token}`
-      },
-      mode: 'no-cors'
+        authorization: `Bearer ${token}`,
+
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      })
     })
       .then(res => res.text())
       .then(text => (text.length ? JSON.parse(text) : {}))
