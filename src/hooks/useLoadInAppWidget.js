@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const URI = 'https://auth.live-chat-krb.com/';
+const LOCAL_URI = 'http://localhost:5000';
 
 export const useLoadInAppWidget = () => {
   const [token, updateToken] = useState(null);
@@ -24,23 +25,20 @@ export const useLoadInAppWidget = () => {
       return;
     }
 
-    fetch(URI, {
+    fetch(LOCAL_URI, {
       method: 'GET',
-      withCredentials: true,
-      credentials: 'include',
 
       headers: new Headers({
         accept: 'application/json',
-        authorization: `Bearer ${token}`,
+        authorization: `Bearer ${btoa(token)}`,
 
         Accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${btoa(token)}`
       })
-    })
-      .then(res => res.text())
-      .then(text => (text.length ? JSON.parse(text) : {}))
-      .catch(error => {
-        throw error;
-      });
+    }).then(response => {
+      if (!response.ok) throw new Error(response.status);
+
+      return response.json();
+    });
   }, [token, error]);
 };
