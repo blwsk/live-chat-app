@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-const URI = 'https://auth.live-chat-krb.com/';
-// const URI = 'http://localhost:5000';
+// const URI = 'https://auth.live-chat-krb.com/';
+const URI = 'http://localhost:5000';
 
 export const useLoadInAppWidget = () => {
   const [token, updateToken] = useState(null);

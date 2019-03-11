@@ -1,12 +1,21 @@
-import React from 'react';
-import { useRequireAuth } from '../hooks/useRequireAuth';
+import React, { useEffect } from 'react';
 
-function requireAuth(Component) {
-  return props => {
-    const isAuthenticated = useRequireAuth({ history: props.history });
+function RequireAuth({ isAuthenticated, children, push }) {
+  useEffect(() => {
+    if (!isAuthenticated) {
+      push('/login');
+    }
+  }, []);
 
-    return isAuthenticated && <Component {...props} />;
-  };
+  return <>{isAuthenticated && children}</>;
 }
+
+const requireAuth = isAuthenticated => Component => props => {
+  return (
+    <RequireAuth isAuthenticated={isAuthenticated} push={props.history.push}>
+      <Component {...props} />
+    </RequireAuth>
+  );
+};
 
 export default requireAuth;
