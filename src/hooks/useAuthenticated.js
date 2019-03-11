@@ -1,17 +1,23 @@
 import { useState, useEffect } from 'react';
 
+export const status = {
+  AUTHENTICATED: 'authenticated',
+  PENDING: 'pending',
+  UNKNOWN: 'unknown'
+};
+
 export const useAuthenticated = () => {
-  const [authenticated, updateAuthenticated] = useState(!!window.firebase.auth().currentUser);
+  const [currentStatus, updateCurrentStatus] = useState(status.PENDING);
 
   useEffect(() => {
     window.firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        updateAuthenticated(true);
+        updateCurrentStatus(status.AUTHENTICATED);
       } else {
-        updateAuthenticated(false);
+        updateCurrentStatus(status.UNKNOWN);
       }
     });
-  }, [authenticated]);
+  }, [currentStatus]);
 
-  return authenticated;
+  return currentStatus;
 };

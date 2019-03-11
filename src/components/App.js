@@ -8,19 +8,19 @@ import Empty from '../pages/Empty';
 import Login from '../pages/Login';
 import Logout from '../pages/Logout';
 import Auth from '../pages/Auth';
-import { useAuthenticated } from '../hooks/useAuthenticated';
+import { useAuthenticated, status } from '../hooks/useAuthenticated';
 
 import requireAuth from './requireAuth';
 
 function App() {
-  const authenticated = useAuthenticated();
+  const authStatus = useAuthenticated();
 
   const renderHeader = useCallback(() => (
     <header>
       <Link to="/">
         <button>Home</button>
       </Link>
-      {authenticated ? (
+      {authStatus === status.AUTHENTICATED ? (
         <Link to="/logout">
           <button>Logout</button>
         </Link>
@@ -29,7 +29,7 @@ function App() {
           <button>Login</button>
         </Link>
       )}
-      {authenticated && (
+      {authStatus === status.AUTHENTICATED && (
         <>
           <Link to="/about">
             <button>About</button>
@@ -44,6 +44,10 @@ function App() {
       )}
     </header>
   ));
+
+  if (authStatus === status.PENDING) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Router>
