@@ -6,6 +6,7 @@ const URI = 'https://auth.live-chat-krb.com/';
 export const useLoadInAppWidget = () => {
   const [token, updateToken] = useState(null);
   const [error, updateError] = useState(null);
+  const [response, updateResponse] = useState(null);
 
   useEffect(() => {
     window.firebase
@@ -32,10 +33,20 @@ export const useLoadInAppWidget = () => {
         accept: 'application/json',
         authorization: `Bearer ${token}`
       })
-    }).then(response => {
-      if (!response.ok) throw new Error(response.status);
+    })
+      .then(response => {
+        if (!response.ok) throw new Error(response.status);
 
-      return response.json();
-    });
+        return response.json();
+      })
+      .then(updateResponse);
   }, [token, error]);
+
+  useEffect(() => {
+    if (response) {
+      const { userContextRequest } = response;
+
+      window.HubSpotConversations.widget.load(userContextRequest);
+    }
+  }, [response]);
 };
