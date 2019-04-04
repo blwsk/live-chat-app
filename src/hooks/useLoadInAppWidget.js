@@ -47,6 +47,18 @@ export const useLoadInAppWidget = () => {
       const { userContextRequest } = response;
 
       window.HubSpotConversations.widget.load(userContextRequest);
+
+      window.HubSpotConversations.on('conversationStarted', payload => {
+        console.log(`Started conversation with id ${payload.conversation.conversationId}`);
+      });
+
+      window.HubSpotConversations.on('unreadConversationCountChanged', payload => {
+        console.log(`New unread count is ${payload.unreadCount}!`);
+      });
+
+      window.HubSpotConversations.on('conversationClosed', payload => {
+        console.log(`Conversation with id ${payload.conversation.conversationId} has been closed!`);
+      });
     }
   }, [response]);
 };
